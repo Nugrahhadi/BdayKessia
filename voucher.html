@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Birthday Voucher for Laiza</title>
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: "Arial", sans-serif;
+        background-color: #fce4ec;
+      }
+
+      .voucher-container {
+        background: white;
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 90%;
+        max-width: 400px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .voucher-container::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: linear-gradient(to right, #ff69b4, #ffb6c1);
+      }
+
+      .voucher-title {
+        color: #ff69b4;
+        margin-bottom: 1.5rem;
+        font-size: 1.5rem;
+      }
+
+      .voucher-content {
+        margin: 1.5rem 0;
+        padding: 1rem;
+        border: 2px dashed #ffb6c1;
+        border-radius: 10px;
+      }
+
+      .voucher-value {
+        font-size: 1.25rem;
+        color: #ff69b4;
+        font-weight: bold;
+        margin: 1rem 0;
+      }
+
+      .redeem-btn {
+        background: #ff69b4;
+        color: white;
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 25px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: transform 0.2s, background-color 0.2s;
+      }
+
+      .redeem-btn:hover {
+        background: #ff1493;
+        transform: scale(1.05);
+      }
+
+      .voucher-code {
+        font-family: monospace;
+        font-size: 1.2rem;
+        color: #ff69b4;
+        padding: 0.5rem;
+        background: #fff0f5;
+        border-radius: 5px;
+        margin: 1rem 0;
+        display: none;
+      }
+
+      @keyframes hearts {
+        0% {
+          transform: translateY(0) rotate(0);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-100px) rotate(360deg);
+          opacity: 0;
+        }
+      }
+
+      .heart {
+        position: absolute;
+        font-size: 1.5rem;
+        animation: hearts 2s ease-out forwards;
+        opacity: 0;
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        animation: fadeIn 0.3s ease-out;
+      }
+
+      .modal-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 2rem;
+        border-radius: 20px;
+        box-shadow: 0 4px 20px rgba(255, 105, 180, 0.3);
+        max-width: 90%;
+        width: 400px;
+        text-align: center;
+        animation: slideIn 0.5s ease-out;
+        border: 3px solid #ff69b4;
+      }
+
+      .modal-title {
+        color: #ff69b4;
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.2);
+      }
+
+      .modal-message {
+        color: #333;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+      }
+
+      .modal-code {
+        background: #fce4ec;
+        padding: 1rem;
+        border-radius: 10px;
+        font-family: monospace;
+        font-size: 1.3rem;
+        color: #ff1493;
+        margin: 1rem 0;
+        border: 2px dashed #ff69b4;
+      }
+
+      .modal-close {
+        background: #ff69b4;
+        color: white;
+        border: none;
+        padding: 0.8rem 2rem;
+        border-radius: 25px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 1rem;
+      }
+
+      .modal-close:hover {
+        background: #ff1493;
+        transform: scale(1.05);
+        box-shadow: 0 4px 15px rgba(255, 105, 180, 0.4);
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translate(-50%, -60%);
+        }
+        to {
+          opacity: 1;
+          transform: translate(-50%, -50%);
+        }
+      }
+
+      .sparkle {
+        position: absolute;
+        pointer-events: none;
+        animation: sparkleAnim 1.5s linear forwards;
+      }
+
+      @keyframes sparkleAnim {
+        0% {
+          transform: translate(0, 0) rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translate(var(--tx), var(--ty)) rotate(360deg);
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="customModal" class="modal">
+      <div class="modal-content">
+        <h2 class="modal-title">🎉 Happy Birthday, Laiza! 🎉</h2>
+        <div class="modal-message">
+          Congratulations! You've received a special novel voucher on your
+          birthday!
+        </div>
+        <div class="modal-message">
+          Please send this code to WhatsApp 081287787857:
+        </div>
+        <div class="modal-code" id="modalVoucherCode"></div>
+        <button class="modal-close" onclick="closeModal()">Close</button>
+      </div>
+    </div>
+
+    <div class="voucher-container">
+      <h1 class="voucher-title">Special Birthday Voucher</h1>
+      <div class="voucher-content">
+        <p>This voucher entitles</p>
+        <div class="voucher-value">KESSIA LAIZA ROHIM</div>
+        <p>to receive</p>
+        <div class="voucher-value">The Novel You Want</div>
+        <p>on her special day</p>
+      </div>
+      <button class="redeem-btn" onclick="redeemVoucher()">
+        Redeem Voucher
+      </button>
+      <div id="voucherCode" class="voucher-code"></div>
+    </div>
+
+    <script>
+      function createHeart() {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "💝";
+        heart.style.left = Math.random() * 100 + "vw";
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        }, 2000);
+      }
+
+      function showHearts() {
+        for (let i = 0; i < 10; i++) {
+          setTimeout(createHeart, i * 200);
+        }
+      }
+
+      function createSparkle(x, y) {
+        const sparkle = document.createElement("div");
+        sparkle.className = "sparkle";
+        sparkle.innerHTML = "✨";
+        sparkle.style.left = x + "px";
+        sparkle.style.top = y + "px";
+        sparkle.style.setProperty("--tx", Math.random() * 100 - 50 + "px");
+        sparkle.style.setProperty("--ty", Math.random() * -100 - 50 + "px");
+        document.body.appendChild(sparkle);
+
+        setTimeout(() => sparkle.remove(), 1500);
+      }
+
+      function showSparkles(element) {
+        const rect = element.getBoundingClientRect();
+        for (let i = 0; i < 10; i++) {
+          setTimeout(() => {
+            createSparkle(
+              rect.left + Math.random() * rect.width,
+              rect.top + Math.random() * rect.height
+            );
+          }, i * 150);
+        }
+      }
+
+      function closeModal() {
+        const modal = document.getElementById("customModal");
+        modal.style.display = "none";
+      }
+
+      function redeemVoucher() {
+        const voucherCode = "BDAYLAIZA2025";
+
+        showHearts();
+
+        const modal = document.getElementById("customModal");
+        const modalCodeElement = document.getElementById("modalVoucherCode");
+        modalCodeElement.textContent = voucherCode;
+        modal.style.display = "block";
+
+        const codeElement = document.getElementById("voucherCode");
+        codeElement.style.display = "block";
+        codeElement.textContent = voucherCode;
+
+        const redeemBtn = document.querySelector(".redeem-btn");
+        redeemBtn.disabled = true;
+        redeemBtn.textContent = "Voucher Redeemed!";
+
+        showSparkles(document.querySelector(".modal-content"));
+      }
+    </script>
+  </body>
+</html>

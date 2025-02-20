@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday Laiza ❤️</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+
+      .header {
+        text-align: center;
+        padding: 2rem 0;
+        position: relative;
+      }
+
+      .title {
+        font-family: "Dancing Script", cursive;
+        font-size: 4rem;
+        color: #e91e63;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 1rem;
+        opacity: 0;
+        animation: fadeInUp 1s ease forwards;
+      }
+
+      .subtitle {
+        font-size: 1.2rem;
+        color: #ad1457;
+        margin-bottom: 2rem;
+        opacity: 0;
+        animation: fadeInUp 1s ease 0.3s forwards;
+      }
+
+      .photo-gallery {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        flex-wrap: wrap;
+        margin: 3rem 0;
+      }
+
+      .photo-frame {
+        width: 300px;
+        height: 400px;
+        background: white;
+        padding: 1rem;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        transform: rotate(-3deg);
+        transition: transform 0.3s ease;
+        cursor: pointer;
+        position: relative;
+        opacity: 0;
+        animation: fadeInUp 1s ease 0.6s forwards;
+      }
+
+      .photo-frame:nth-child(2) {
+        transform: rotate(3deg);
+        animation-delay: 0.9s;
+      }
+
+      .photo-frame:hover {
+        transform: rotate(0) scale(1.05);
+        z-index: 2;
+      }
+
+      .photo {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .message-box {
+        background: white;
+        padding: 2rem;
+        border-radius: 20px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        margin: 3rem auto;
+        max-width: 800px;
+        position: relative;
+        opacity: 0;
+        animation: fadeInUp 1s ease 1.2s forwards;
+      }
+
+      .message {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: #333;
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      .signature {
+        font-family: "Dancing Script", cursive;
+        font-size: 1.5rem;
+        color: #e91e63;
+        text-align: right;
+      }
+
+      .floating-hearts {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      .heart {
+        position: absolute;
+        font-size: 1.5rem;
+        animation: floatHeart 4s ease-in-out infinite;
+        opacity: 0;
+      }
+
+      .btn-voucher {
+        text-align: center;
+        margin: 2rem 0;
+      }
+
+      .btn-voucher button {
+        display: inline-block;
+        padding: 1rem 2rem;
+        font-size: 1.2rem;
+        background: linear-gradient(45deg, #e91e63, #ff4081);
+        color: white;
+        text-decoration: none;
+        border-radius: 50px;
+        box-shadow: 0 4px 15px rgba(233, 30, 99, 0.3);
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        animation: fadeInUp 1s ease 1.8s forwards;
+        opacity: 0;
+      }
+
+      .btn-voucher button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(233, 30, 99, 0.4);
+        background: linear-gradient(45deg, #ff4081, #e91e63);
+      }
+
+      .btn-voucher button:active {
+        transform: translateY(1px);
+        box-shadow: 0 2px 10px rgba(233, 30, 99, 0.3);
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes floatHeart {
+        0% {
+          transform: translateY(100vh) translateX(0) rotate(0);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-100px) translateX(var(--translate-x))
+            rotate(360deg);
+          opacity: 0;
+        }
+      }
+
+      .countdown {
+        font-size: 1.5rem;
+        color: #e91e63;
+        text-align: center;
+        margin-bottom: 2rem;
+        opacity: 0;
+        animation: fadeInUp 1s ease 1.5s forwards;
+      }
+
+      .social-link {
+        display: inline-block;
+        margin: 1rem;
+        font-size: 1.2rem;
+        color: #e91e63;
+        text-decoration: none;
+        transition: transform 0.3s ease;
+      }
+
+      .social-link:hover {
+        transform: scale(1.2);
+      }
+
+      @media (max-width: 768px) {
+        .title {
+          font-size: 3rem;
+        }
+        .photo-frame {
+          width: 250px;
+          height: 350px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="floating-hearts"></div>
+
+    <div class="container">
+      <header class="header">
+        <h1 class="title">Happy Birthday, Kessia Laiza Rohim!</h1>
+        <p class="subtitle">On Your Special Day</p>
+        <div class="countdown" id="countdown"></div>
+      </header>
+
+      <div class="photo-gallery">
+        <div class="photo-frame">
+          <img src="cp1.JPG" alt="Our Memory 1" class="photo" />
+        </div>
+        <div class="photo-frame">
+          <img src="cp2.jpg" alt="Our Memory 2" class="photo" />
+        </div>
+        <div class="photo-frame">
+          <img src="cp3.jpeg" alt="Our Memory 3" class="photo" />
+        </div>
+        <div class="photo-frame">
+          <img src="cp4.jpeg" alt="Our Memory 4" class="photo" />
+        </div>
+        <div class="photo-frame">
+          <img src="cp5.jpeg" alt="Our Memory 5" class="photo" />
+        </div>
+        <div class="photo-frame">
+          <img src="cp6.jpeg" alt="Our Memory 6" class="photo" />
+        </div>
+      </div>
+
+      <div class="message-box">
+        <p class="message">
+          Laiza sayang,<br /><br />
+
+          Di hari spesial ini, aku mau ngucapin selamat ulang tahun yang ke 20
+          tahun. Kepala dua bukan berarti tua, tapi dewasa. Semoga di hari
+          spesial kamu bisa mencapai semua goals yang kamu rencanakan, di
+          perlancar setiap urusan, dan di mudahkan setiap permasalahan yang
+          datang. Aku juga berharap semoga kita bisa sama-sama terus.<br /><br />
+
+          Semoga di usiamu yang baru ini, semua impian dan harapanmu dapat
+          terwujud. Aku akan selalu support kamu di setiap kegiatan yang kamu
+          jalani. Semua do'a terbaik untuk kamu dari aku, semoga tuhan
+          memberkati setiap langkahmu.<br /><br />
+
+          Thank you for being the most beautiful part of my life. ❤️
+        </p>
+        <div class="signature">With Love, Nugross</div>
+      </div>
+
+      <div class="btn-voucher">
+        <button onclick="handleVoucherClick()">
+          I Have Something For You!
+        </button>
+      </div>
+    </div>
+
+    <script>
+      // Fungsi floating hearts
+      function createHeart() {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.setProperty(
+          "--translate-x",
+          Math.random() * 200 - 100 + "px"
+        );
+
+        document.querySelector(".floating-hearts").appendChild(heart);
+
+        heart.addEventListener("animationend", () => heart.remove());
+      }
+
+      // hearts
+      setInterval(createHeart, 550);
+
+      // Fungsi countdown
+      function updateCountdown() {
+        const birthday = new Date("2025-03-03");
+        const now = new Date();
+        const diff = birthday - now;
+
+        if (diff > 0) {
+          const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+          const hours = Math.floor(
+            (diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+          );
+          const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+          document.getElementById(
+            "countdown"
+          ).innerHTML = `${days} days ${hours} hours ${minutes} minutes ${seconds} seconds until your birthday! 🎉`;
+        } else {
+          document.getElementById("countdown").innerHTML =
+            "Happy Birthday! 🎉🎂";
+        }
+      }
+
+      // klik voucher button
+      function handleVoucherClick() {
+        const button = document.querySelector(".btn-voucher button");
+        button.style.transform = "scale(0.95)";
+        setTimeout(() => {
+          window.location.href = "voucher.html";
+        }, 200);
+      }
+
+      // Update countdown setiap detik
+      setInterval(updateCountdown, 1000);
+      updateCountdown();
+    </script>
+  </body>
+</html>
