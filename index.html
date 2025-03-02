@@ -305,7 +305,7 @@
 
       // Fungsi countdown
       function updateCountdown() {
-        const birthday = new Date("2025-03-03");
+        const birthday = new Date("2025-03-03T00:00:00");
         const now = new Date();
         const diff = birthday - now;
 
@@ -317,9 +317,15 @@
           const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
           const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-          document.getElementById(
-            "countdown"
-          ).innerHTML = `${days} days ${hours} hours ${minutes} minutes ${seconds} seconds until your birthday! 🎉`;
+          let countdownText = "";
+
+          if (days > 0) {
+            countdownText += `${days} days `;
+          }
+
+          countdownText += `${hours} hours ${minutes} minutes ${seconds} seconds until your birthday! 🎉`;
+
+          document.getElementById("countdown").innerHTML = countdownText;
         } else {
           document.getElementById("countdown").innerHTML =
             "Happy Birthday! 🎉🎂";
